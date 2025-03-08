@@ -14,10 +14,6 @@ https://github.com/user-attachments/assets/5f04f573-e82d-49ef-b971-a9824acd7c6e
 - **User authentication** and management
 - **Modern UI** with dark mode and responsive design
 - **User search** functionality
-- **File attachments** support
-- **Emoji picker** for expressive communication
-- **AI assistance** for smart replies
-- **Voice messaging** capabilities
 
 ## Tech Stack
 
