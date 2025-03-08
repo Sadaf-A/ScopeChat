@@ -12,7 +12,6 @@ export default function Auth() {
   const [mode, setMode] = useState("signin");
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
 
-  // Track mouse position for interactive effects
   useEffect(() => {
     const handleMouseMove = (e) => {
       setMousePosition({ x: e.clientX, y: e.clientY });
@@ -56,7 +55,6 @@ export default function Auth() {
   
     console.log("Logged in successfully!", data);
   
-    // Check if session is stored
     const { data: sessionData, error: sessionError } = await supabase.auth.getSession();
     if (sessionError) {
       console.error("Session Error:", sessionError);
