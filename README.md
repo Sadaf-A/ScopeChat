@@ -2,7 +2,11 @@
 
 A modern, real-time chat application built with Next.js, Supabase, and Tailwind CSS.
 
-https://github.com/user-attachments/assets/ec551739-2ce6-4c06-a189-607212f7a17f
+
+
+https://github.com/user-attachments/assets/5f04f573-e82d-49ef-b971-a9824acd7c6e
+
+
 
 ## Features
 
