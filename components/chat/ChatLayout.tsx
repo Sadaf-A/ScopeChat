@@ -14,11 +14,9 @@ import { format } from 'date-fns';
 import { supabase } from '@/lib/supabase';
 import { useRouter } from 'next/navigation';
 
-// Define proper types for our data structures
 interface User {
   id: string;
   email: string;
-  // Add other user properties as needed
 }
 
 interface Message {
@@ -28,14 +26,12 @@ interface Message {
   content: string;
   created_at: string;
   sender_name?: string;
-  // Add other message properties as needed
 }
 
 interface Chat {
   id: string;
   sender_id: string;
   receiver_id: string;
-  // Add other chat properties as needed
 }
 
 export default function ChatLayout() {
@@ -114,7 +110,6 @@ export default function ChatLayout() {
     fetchUser();
   }, []);
 
-  // Handle search functionality
   useEffect(() => {
     if (searchQuery.trim() === "") {
       setFilteredUsers(users);
@@ -152,9 +147,8 @@ export default function ChatLayout() {
     setNewMessage("");
   };
   
-  const handleChatSelect = async (receiver: User) => {
-    const userData = await supabase.auth.getUser();
-    const current_user = userData.data.user;
+  const handleChatSelect = async (receiver: any) => {
+    const current_user = (await supabase.auth.getUser()).data.user;
     if (!current_user) {
       console.error("❌ No authenticated user found!");
       return;
@@ -166,7 +160,7 @@ export default function ChatLayout() {
       .from("chats")
       .select("*")
       .or(
-        `sender_id.eq.${current_user.id},receiver_id.eq.${receiver.id},sender_id.eq.${receiver.id},receiver_id.eq.${current_user.id}`
+        `and(sender_id.eq.${current_user.id},receiver_id.eq.${receiver.id}),and(sender_id.eq.${receiver.id},receiver_id.eq.${current_user.id})`
       );
   
     if (chatError) {
@@ -176,7 +170,7 @@ export default function ChatLayout() {
   
     console.log("🔍 Existing Chats:", existingChats);
   
-    if (existingChats && existingChats.length > 0) {
+    if (existingChats.length > 0) {
       console.log("✅ Chat already exists, opening chat...");
       setSelectedChat(existingChats[0]);
       return;
@@ -196,7 +190,7 @@ export default function ChatLayout() {
   
     console.log("✅ New chat created:", newChat);
     setSelectedChat(newChat);
-  };  
+  };
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
